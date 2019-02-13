@@ -1,0 +1,5 @@
+logbook
+requests
+loguru
+python-nmap
+ConfigParser
