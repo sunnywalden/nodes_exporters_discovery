@@ -4,3 +4,4 @@ loguru
 python-nmap
 ConfigParser
 uWSGI
+Flask
