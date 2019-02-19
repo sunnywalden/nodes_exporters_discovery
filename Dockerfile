@@ -1,5 +1,5 @@
 # Use centos image as base image
-FROM centos/centos/python-27-centos7:latest
+FROM centos/python-27-centos7:latest
 
 MAINTAINER SHUANGSELOTTERY Docker Maintainers "sunnywalden@gmail.com"
 
