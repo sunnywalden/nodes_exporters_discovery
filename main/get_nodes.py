@@ -183,7 +183,7 @@ class NodesMetrics:
 
 
 if __name__ == "__main__":
-    url = 'https://prom.ctcfin.com/prome/api/v1/query?'
+    url = 'https://prom.demo.com/prome/api/v1/query?'
 
     #query_current_ip = 'node_virtual_type{job='nodes'}'
     # query_current_ip = 'query=avg({__name__=~"node_disk_read_time_(ms|seconds_total)",job="nodes",device=~"(dm-|sd[a-z]).*$"}) by (instance_ip)'
