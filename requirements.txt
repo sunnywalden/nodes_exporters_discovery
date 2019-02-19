@@ -3,3 +3,4 @@ requests
 loguru
 python-nmap
 ConfigParser
+uWSGI
