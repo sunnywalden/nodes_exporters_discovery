@@ -10,6 +10,10 @@ EXPOSE 8888
 
 USER root
 
+VOLUME /var/data/nodes_discovery/data $DISCOVERY_PATH/data
+
+VOLUME /var/data/nodes_discovery/config $DISCOVERY_PATH/config
+
 # Set the working directory to /opt
 WORKDIR $DISCOVERY_PATH
 
@@ -17,10 +21,17 @@ WORKDIR $DISCOVERY_PATH
 COPY . $DISCOVERY_PATH
 
 # Update pip
-RUN pip install --upgrade pip && pip install --trusted-host pypi.python.org -r requirements.txt
+RUN ["/bin/bash","-c","pip install --upgrade pip && \
+pip install --trusted-host pypi.python.org -r requirements.txt && \
+rm -rf /var/lib/yum/history/*.sqlite && \
+yum install -y nmap"]
 
 # Change directory to bin path
 WORKDIR $DISCOVERY_PATH/bin
 
 # Start lottery service
 ENTRYPOINT ["uwsgi", "uwsgi.ini"]
+
+# Health check
+HEALTHCHECK --interval=5m --timeout=3s \
+CMD curl -f http://localhost:8888/nodes/api/v1 || exit 1
