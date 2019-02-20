@@ -10,9 +10,7 @@ EXPOSE 8888
 
 USER root
 
-VOLUME /var/data/nodes_discovery/data $DISCOVERY_PATH/data
-
-VOLUME /var/data/nodes_discovery/config $DISCOVERY_PATH/config
+VOLUME ["$DISCOVERY_PATH/data", "$DISCOVERY_PATH/config"]
 
 # Set the working directory to /opt
 WORKDIR $DISCOVERY_PATH
@@ -34,4 +32,4 @@ ENTRYPOINT ["uwsgi", "uwsgi.ini"]
 
 # Health check
 HEALTHCHECK --interval=5m --timeout=3s \
-CMD curl -f http://localhost:8888/nodes/api/v1 || exit 1
+CMD curl -fs http://localhost:8888/nodes/api/v1 |grep '"status":"success"'|| exit 1
